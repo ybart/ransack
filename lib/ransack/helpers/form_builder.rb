@@ -1,16 +1,18 @@
 require 'action_view'
 
-module ActionView::Helpers::Tags
-  # TODO: Find a better way to solve this issue!
-  # This patch is needed since this Rails commit:
-  # https://github.com/rails/rails/commit/c1a118a
-  class Base
-    private
-    def value(object)
-      object.send @method_name if object # use send instead of public_send
-    end
-  end
-end
+# Disable monkey-patch (breaks on Rails 5.2)
+#
+#module ActionView::Helpers::Tags
+#  # TODO: Find a better way to solve this issue!
+#  # This patch is needed since this Rails commit:
+#  # https://github.com/rails/rails/commit/c1a118a
+#  class Base
+#    private
+#    def value(object)
+#      object.send @method_name if object # use send instead of public_send
+#    end
+#  end
+#end
 
 RANSACK_FORM_BUILDER = 'RANSACK_FORM_BUILDER'.freeze
 
