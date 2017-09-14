@@ -2,6 +2,33 @@ require 'action_view'
 
 # Disable monkey-patch (breaks on Rails 5.2)
 #
+# | ActionView::Template::Error (wrong number of arguments (given 0, expected 1)):
+# |      5:   <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
+# |      6:     f.inputs do
+# |      7:       resource.class.authentication_keys.each_with_index { |key, index|
+# |      8:         f.input key, label: t("active_admin.devise.#{key}.title"), input_html: { autofocus: index.zero? }
+# |      9:       }
+# |     10:       f.input :password, label: t('active_admin.devise.password.title')
+# |     11:       f.input :remember_me, label: t('active_admin.devise.login.remember_me'), as: :boolean if devise_mapping.rememberable?
+# |
+# | ransack-c869fc210500/lib/ransack/helpers/form_builder.rb:9:in `value'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/tags/base.rb:53:in `value_before_type_cast'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/tags/text_field.rb:15:in `block in render'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/tags/text_field.rb:15:in `fetch'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/tags/text_field.rb:15:in `render'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/form_helper.rb:1520:in `email_field'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/form_helper.rb:1698:in `email_field'
+# | formtastic (3.1.5) lib/formtastic/inputs/email_input.rb:36:in `block in to_html'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/capture_helper.rb:41:in `block in capture'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/capture_helper.rb:205:in `with_output_buffer'
+# | rails-cffa32f95d29/actionview/lib/action_view/helpers/capture_helper.rb:41:in `capture'
+# | formtastic (3.1.5) lib/formtastic/inputs/base/wrapping.rb:11:in `input_wrapping'
+# | activeadmin (1.1.0) lib/active_admin/form_builder.rb:6:in `input_wrapping'
+# | formtastic (3.1.5) lib/formtastic/inputs/email_input.rb:34:in `to_html'
+# | formtastic (3.1.5) lib/formtastic/helpers/input_helper.rb:242:in `input'
+# | arbre (1.1.1) lib/arbre/rails/forms.rb:30:in `proxy_call_to_form'
+# | activeadmin (1.1.0) lib/active_admin/views/components/active_admin_form.rb:65:in `input'
+#
 #module ActionView::Helpers::Tags
 #  # TODO: Find a better way to solve this issue!
 #  # This patch is needed since this Rails commit:
